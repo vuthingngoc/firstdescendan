@@ -1,12 +1,22 @@
 import styled from 'styled-components';
 
 const Header = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   min-width: 1280px;
   display: flex;
   min-height: 80px;
   background: rgba(0, 0, 0, 0.8);
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 80px, rgba(0, 0, 0, 0.76) 171.5px, rgba(0, 0, 0, 0.57));
+  ::before {
+    position: absolute;
+    top: 79px;
+    width: 100%;
+    height: 1px;
+    background-color: hsla(0, 0%, 70.2%, 0.25);
+    content: '';
+  }
 `;
 
 const LogoFrame = styled.h1`
@@ -38,16 +48,7 @@ const NavButton = styled.a`
   text-align: center;
   font-family: 'Pretendard', sans-serif;
   text-decoration: inherit;
-  &:before {
-    position: absolute;
-    left: 50%;
-    display: block;
-    content: '';
-    opacity: 0;
-    transform: translateX(-50%);
-    transition: opacity 3s ease;
-  }
-  &:hover:before {
+  ::before {
     top: 76px;
     width: 91px;
     height: 8px;
@@ -55,20 +56,32 @@ const NavButton = styled.a`
     border-radius: 50%;
     filter: blur(12px);
   }
-  &:after {
+  &:hover::before {
     position: absolute;
     left: 50%;
     display: block;
     content: '';
     opacity: 0;
+    height: 8;
     transform: translateX(-50%);
     transition: opacity 3s ease;
   }
-  &:hover:after {
+  ::after {
     top: 78px;
     width: 114px;
     height: 3px;
     background-color: rgba(73, 255, 244, 0.8);
+    font-size: 50;
+  }
+  &:hover::after {
+    position: absolute;
+    left: 50%;
+    display: block;
+    content: '';
+    opacity: 0;
+    height: 3;
+    transform: translateX(-50%);
+    transition: opacity 3s ease;
   }
 `;
 
