@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { CloseBeta, NavbarTitle, TimezoneAnnouce, Plateform } from '../../constant/navbar';
 import {
   BrandLogo,
   CommingSoonLogo,
@@ -79,51 +80,51 @@ const NavbarMain: React.FC = () => {
         <ul className="flex" style={{ width: '100%' }}>
           <LiNav className="list-item">
             <NavButton href="#" onClick={(e: MouseEvent) => e.preventDefault()}>
-              NEWS
+              {NavbarTitle.news}
             </NavButton>
             <UlDropDown>
               <LiDropDown>
                 <Item href="#" onClick={(e: MouseEvent) => e.preventDefault()}>
-                  LATEST NEWS
+                  {NavbarTitle.lastestNew}
                 </Item>
               </LiDropDown>
             </UlDropDown>
           </LiNav>
           <LiNav className="list-item">
             <NavButton href="#" onClick={(e: MouseEvent) => e.preventDefault()}>
-              INFO
+              {NavbarTitle.info}
             </NavButton>
             <UlDropDown>
               <LiDropDown>
                 <Item href="#" onClick={(e: MouseEvent) => e.preventDefault()}>
-                  STORY
+                  {NavbarTitle.story}
                 </Item>
               </LiDropDown>
               <LiDropDown>
                 <Item href="#" onClick={(e: MouseEvent) => e.preventDefault()}>
-                  CHARACTER
+                  {NavbarTitle.character}
                 </Item>
               </LiDropDown>
             </UlDropDown>
           </LiNav>
           <LiNav className="list-item">
             <NavButton href="#" onClick={(e: MouseEvent) => e.preventDefault()}>
-              SUPPORT
+              {NavbarTitle.support}
             </NavButton>
             <UlDropDown>
               <LiDropDown>
                 <Item href="#" onClick={(e: MouseEvent) => e.preventDefault()}>
-                  FAQ
+                  {NavbarTitle.faq}
                 </Item>
               </LiDropDown>
               <LiDropDown>
                 <Item href="#" onClick={(e: MouseEvent) => e.preventDefault()}>
-                  SUPPORT
+                  {NavbarTitle.support}
                 </Item>
               </LiDropDown>
               <LiDropDown>
                 <Item href="#" onClick={(e: MouseEvent) => e.preventDefault()}>
-                  SURVEY
+                  {NavbarTitle.survey}
                 </Item>
               </LiDropDown>
             </UlDropDown>
@@ -132,10 +133,10 @@ const NavbarMain: React.FC = () => {
       </NavButtonLayout>
       <RightNav>
         <CountDay>
-          <CountDayTitle>STEAM BETA CLOSE</CountDayTitle>
+          <CountDayTitle>{CloseBeta.text}</CountDayTitle>
           <CountDayLeft>
             <CountDayLeftText style={{ top: '1px', color: '#00d0c4', textShadow: '0 4px 4px rgb(0 0 0 / 25%)', filter: 'blur(0.5px)' }}>
-              D - 0
+              {CloseBeta.day}
             </CountDayLeftText>
             <CountDayLeftText style={{ color: '#e3e3e3', textShadow: '0 0 6px rgb(73 255 244 / 80%)', fontWeight: '700' }}>D - 0</CountDayLeftText>
           </CountDayLeft>
@@ -143,10 +144,10 @@ const NavbarMain: React.FC = () => {
         <PopTimeButton>
           <Timezone>
             <TimezoneSwiper style={swipperStyle}>
-              <TimezoneText>UTC</TimezoneText>
-              <TimezoneText>PDT</TimezoneText>
-              <TimezoneText>UTC</TimezoneText>
-              <TimezoneText>PDT</TimezoneText>
+              <TimezoneText>{TimezoneAnnouce.utc}</TimezoneText>
+              <TimezoneText>{TimezoneAnnouce.pdt}</TimezoneText>
+              <TimezoneText>{TimezoneAnnouce.utc}</TimezoneText>
+              <TimezoneText>{TimezoneAnnouce.pdt}</TimezoneText>
             </TimezoneSwiper>
           </Timezone>
         </PopTimeButton>
@@ -160,20 +161,20 @@ const NavbarMain: React.FC = () => {
                   target="blank"
                   url="https://tfdvod.dn.nexoncdn.co.kr/img/cbt/header/btn_goSteam.png"
                 >
-                  STEAM
+                  {Plateform.steam}
                 </BrandLogo>
               </DropDownItem>
               <DropDownItem>
-                <CommingSoonLogo url="https://tfdvod.dn.nexoncdn.co.kr/img/cbt/header/btn_goPS5.png">PS5</CommingSoonLogo>
+                <CommingSoonLogo url="https://tfdvod.dn.nexoncdn.co.kr/img/cbt/header/btn_goPS5.png">{Plateform.ps5}</CommingSoonLogo>
               </DropDownItem>
               <DropDownItem>
-                <CommingSoonLogo url="https://tfdvod.dn.nexoncdn.co.kr/img/cbt/header/btn_goPS4.png">PS4</CommingSoonLogo>
+                <CommingSoonLogo url="https://tfdvod.dn.nexoncdn.co.kr/img/cbt/header/btn_goPS4.png">{Plateform.ps4}</CommingSoonLogo>
               </DropDownItem>
               <DropDownItem>
-                <CommingSoonLogo url="https://tfdvod.dn.nexoncdn.co.kr/img/cbt/header/btn_goXboxXS.png">XBOX SERIES X|S</CommingSoonLogo>
+                <CommingSoonLogo url="https://tfdvod.dn.nexoncdn.co.kr/img/cbt/header/btn_goXboxXS.png">{Plateform.xboxSeries}</CommingSoonLogo>
               </DropDownItem>
               <DropDownItem>
-                <CommingSoonLogo url="https://tfdvod.dn.nexoncdn.co.kr/img/cbt/header/btn_goXboxXS.png">XBOX ONE</CommingSoonLogo>
+                <CommingSoonLogo url="https://tfdvod.dn.nexoncdn.co.kr/img/cbt/header/btn_goXboxXS.png">{Plateform.xboxOne}</CommingSoonLogo>
               </DropDownItem>
             </DropDownList>
           </PlayGameDropDownBox>

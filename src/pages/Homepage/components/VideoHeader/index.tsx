@@ -1,5 +1,8 @@
-import React from 'react';
-import InfoCategoryLine from './components/InfoCategoryLine';
+import { Modal } from '@mantine/core';
+import React, { useState } from 'react';
+import { annoucement, gameTitle, videoButton, videoSource } from '../../../../constant/homepage.videosection';
+import { InfoCategoryAfter, InfoCategoryBefore, InfoCategoryLine } from './components/CategoryLine';
+import VideoModal from './components/VideoModal';
 import {
   Article,
   BackVideoLayout,
@@ -9,7 +12,10 @@ import {
   InfoCatefory,
   InfoCategoryText,
   InfoTitle,
+  LineAfter,
+  LineBefore,
   NoticeList,
+  Section,
   Thumbnail,
   TopCover,
   Video,
@@ -18,42 +24,67 @@ import {
 } from './styled';
 
 const VideoHeader: React.FC = () => {
+  const [videoModal, setVideoModal] = useState(false);
+
+  const handleCloseModal = () => {
+    setVideoModal(false);
+  };
+
   return (
-    <section style={{ height: '1018px', position: 'relative' }}>
+    <Section>
       <BackVideoLayout>
-        <Video preload autoPlay muted loop="loop" playsinline>
-          <source src="https://tfdvod.dn.nexoncdn.co.kr/img/cbt/main/main_video.mp4" type="video/mp4" />
+        <Video autoPlay muted loop="loop" playsinline>
+          <source src={videoSource} type="video/mp4" />
         </Video>
         <VideoCover />
         <TopCover>
-          <VideoButton>VOD PLAY</VideoButton>
+          <VideoButton onClick={() => setVideoModal(true)}>{videoButton}</VideoButton>
           <GameTitle>
-            <GameText>THE FIRST DESCENDANT</GameText>
+            <GameText>{gameTitle}</GameText>
           </GameTitle>
         </TopCover>
         <NoticeList>
           <div className="flex justify-content-center">
-            <Article>
-              <a href="/en/cbt/news/1912429" style={{ display: 'flex', position: 'relative', height: '100%', overflow: 'hidden' }}>
-                <Info>
-                  <InfoCatefory>
-                    <InfoCategoryLine />
-                    <InfoCategoryText>NOTICE</InfoCategoryText>
-                  </InfoCatefory>
-                  <InfoTitle />
-                </Info>
-                <Thumbnail>
-                  <img
-                    src="https://dszw1qtcnsa5e.cloudfront.net/community/20221027/829e8578-b698-47cb-8a33-8dd0f73596c3/TFDENDofCBT800x450.png"
-                    style={{ height: '100%', objectFit: 'cover' }}
-                  />
-                </Thumbnail>
-              </a>
-            </Article>
+            {annoucement.map((e, value) => {
+              return (
+                <Article key={`article-${value}`}>
+                  <a href="/en/cbt/news/1912429" style={{ display: 'flex', position: 'relative', height: '100%', overflow: 'hidden' }}>
+                    <Info>
+                      <InfoCatefory>
+                        <InfoCategoryLine />
+                        <InfoCategoryText>{e.category}</InfoCategoryText>
+                      </InfoCatefory>
+                      <InfoTitle>{e.title}</InfoTitle>
+                    </Info>
+                    <Thumbnail>
+                      <img src={e.thumbnail} style={{ height: '100%', objectFit: 'cover' }} />
+                    </Thumbnail>
+                    <LineBefore>
+                      <InfoCategoryBefore />
+                    </LineBefore>
+                    <LineAfter className="line-after">
+                      <InfoCategoryAfter />
+                    </LineAfter>
+                  </a>
+                </Article>
+              );
+            })}
           </div>
         </NoticeList>
       </BackVideoLayout>
-    </section>
+      <Modal
+        closeOnEscape={false}
+        closeOnClickOutside={false}
+        padding={0}
+        size="90%"
+        withCloseButton={false}
+        centered
+        opened={videoModal}
+        onClose={() => setVideoModal(false)}
+      >
+        <VideoModal handleCloseModal={handleCloseModal} />
+      </Modal>
+    </Section>
   );
 };
 

@@ -39,6 +39,7 @@ module.exports = {
         imports: 'always-multiline',
         exports: 'always-multiline',
         functions: 'never',
+        enums: 'always-multiline',
       },
     ],
     '@typescript-eslint/member-delimiter-style': [

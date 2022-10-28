@@ -1,5 +1,23 @@
 import styled from 'styled-components';
 
+const Section = styled.section`
+  height: 1018px;
+  position: relative;
+  ::after {
+    z-index: 1;
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 55px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 39px;
+    height: 29px;
+    background-image: url('https://tfdvod.dn.nexoncdn.co.kr/img/cbt/main/icon_scroll.png');
+    opacity: 0.25;
+  }
+`;
+
 const BackVideoLayout = styled.div`
   position: absolute;
   top: 0;
@@ -20,8 +38,6 @@ const Video = styled.video`
   width: 2560px;
   height: 1018px;
   transform: translateX(-50%);
-  max-width: 100%;
-  height: auto;
 `;
 
 const VideoCover = styled.div`
@@ -139,6 +155,9 @@ const Article = styled.article`
   &:hover::before {
     opacity: 1;
   }
+  &:hover a .line-after {
+    width: 100%;
+  }
 `;
 
 const Info = styled.div`
@@ -181,7 +200,30 @@ const Thumbnail = styled.div`
   flex-shrink: 0;
 `;
 
+const LineBefore = styled.div`
+  position: absolute;
+  top: 0;
+  left: 1px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 1px;
+`;
+
+const LineAfter = styled.div`
+  overflow: hidden;
+  width: 0;
+  height: 11px;
+  left: 1px;
+  top: 0;
+  transition: width 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 1px;
+`;
+
 export {
+  Section,
   BackVideoLayout,
   Video,
   VideoCover,
@@ -196,4 +238,6 @@ export {
   InfoTitle,
   Thumbnail,
   InfoCategoryText,
+  LineBefore,
+  LineAfter,
 };
