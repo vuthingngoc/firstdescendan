@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const MouseDragWrap = styled.div`
+const MouseDragWrap = styled.div<{
+  bgColor: string;
+  boxShadow: string;
+  bgImg: string;
+}>`
   background-image: ${(props) => props.bgColor};
   box-shadow: ${(props) => props.boxShadow};
   position: absolute;
@@ -33,7 +37,9 @@ const MouseDragWrap = styled.div`
   }
 `;
 
-const Mouse = styled.div`
+const Mouse = styled.div<{
+  dragBG: string;
+}>`
   background-image: url(${(props) => props.dragBG});
   top: 350px;
   left: -122px;
@@ -47,32 +53,31 @@ const Mouse = styled.div`
   position: absolute;
 `;
 
-const ArrowLeft = styled.div`
-  @keyframes leftStickAnimation {
+const Arrow = styled.div<{
+  arrowBG: string;
+}>`
+  @keyframes ArrowAnimation {
     0% {
-      transform: translateX(0);
+      width: 43px;
     }
     100% {
-      transform: translateX(15px);
+      width: 30px;
     }
   }
-  right: 150px;
-  background-image: ${(props) => props.arrowLeft};
-  background-position: 0 0;
+  background-image: ${(props) => props.arrowBG};
   position: absolute;
   top: 87px;
   width: 43px;
   height: 33px;
   background-size: 25px 33px;
   background-repeat: no-repeat;
-  animation-name: leftStickAnimation;
+  animation-name: ArrowAnimation;
   animation-duration: 0.5s;
   animation-timing-function: ease-in;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 `;
-const LeftStick = styled.span`
-  right: 2px;
+const Stick = styled.span`
   position: absolute;
   top: 16px;
   display: block;
@@ -81,4 +86,4 @@ const LeftStick = styled.span`
   background-color: #fff;
 `;
 
-export { MouseDragWrap, Mouse, ArrowLeft, LeftStick };
+export { MouseDragWrap, Mouse, Arrow, Stick };

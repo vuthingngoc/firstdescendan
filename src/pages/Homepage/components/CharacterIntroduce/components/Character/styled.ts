@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CharacterTitle = styled.h3`
+const CharacterTitle = styled.h3<{ active: number }>`
   position: absolute;
   top: 347px;
   left: 50%;
@@ -12,9 +12,16 @@ const CharacterTitle = styled.h3`
   letter-spacing: 1.6px;
   opacity: 1;
   transition: all 0.3s ease;
+  ${(props) =>
+    props.active === 3
+      ? `top: 164px;
+      color: #fff;
+      transform: translateX(350px);`
+      : ''}
+  ${(props) => (props.active === 2 ? `opacity: 0` : '')}
 `;
 
-const CharacterInfo = styled.dl`
+const CharacterInfo = styled.dl<{ active: number }>`
   position: absolute;
   top: 424px;
   left: calc(50% + 345px);
@@ -23,6 +30,7 @@ const CharacterInfo = styled.dl`
   width: 230px;
   opacity: 1;
   transition: all 0.3s ease;
+  ${(props) => (props.active === 2 ? `opacity: 0` : '')}
 `;
 
 const CharacterNameBold = styled.dt`
