@@ -7,7 +7,7 @@ import Homepage from './pages/Homepage';
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <div className="cbt en">
+      <div id="wrap" className="cbt en">
         <NavbarMain />
         <Routes>
           <Route path="/cbt" element={<Homepage />} />

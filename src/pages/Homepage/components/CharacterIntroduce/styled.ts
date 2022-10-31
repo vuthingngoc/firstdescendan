@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-const Section = styled.section`
+const Section = styled.section<{
+  bgURL: string;
+}>`
   background-image: url(${(props) => props.bgURL});
   position: relative;
   height: 900px;
@@ -8,7 +10,7 @@ const Section = styled.section`
   background-position: top;
 `;
 
-const SwipperWrap = styled.div`
+const SwipperWrap = styled.div<{ overlay: string; nameImg: string }>`
   ::before {
     background-image: url(${(props) => props.overlay});
     background-position: calc(50% - 280px) top;

@@ -51,7 +51,6 @@ const NavbarMain: React.FC = () => {
           swipperStyle.transitionDuration = '300ms';
           setSwipperStyle(newSwipper);
         }
-        console.log(swipperStyle);
         setTimeout(() => {
           const newSwipper = { ...swipperStyle };
           swipperStyle.transitionDuration = '0ms';

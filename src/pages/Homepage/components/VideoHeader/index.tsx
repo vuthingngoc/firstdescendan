@@ -33,7 +33,7 @@ const VideoHeader: React.FC = () => {
   return (
     <Section>
       <BackVideoLayout>
-        <Video autoPlay muted loop="loop" playsinline>
+        <Video autoPlay muted loop>
           <source src={videoSource} type="video/mp4" />
         </Video>
         <VideoCover />

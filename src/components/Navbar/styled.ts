@@ -44,7 +44,7 @@ const NavButtonLayout = styled.nav`
   }
 `;
 
-const NavButton = styled.a`
+const NavButton = styled.a.attrs(() => ({ onClick: MouseEvent }))`
   position: relative;
   display: block;
   height: 80px;
@@ -323,7 +323,9 @@ const DropDownItem = styled.li`
   }
 `;
 
-const BrandLogo = styled.a`
+const BrandLogo = styled.a<{
+  url: string;
+}>`
   position: relative;
   margin: -1px 0 0 -1px;
   display: block;
@@ -335,7 +337,9 @@ const BrandLogo = styled.a`
   background-image: url(${(props) => props.url});
 `;
 
-const CommingSoonLogo = styled.span`
+const CommingSoonLogo = styled.span<{
+  url: string;
+}>`
   position: relative;
   margin: -1px 0 0 -1px;
   display: block;
@@ -364,7 +368,7 @@ const LiDropDown = styled.li`
   }
 `;
 
-const Item = styled.a`
+const Item = styled.a.attrs(() => ({ onClick: MouseEvent }))`
   padding: 0;
   display: block;
   width: 100%;

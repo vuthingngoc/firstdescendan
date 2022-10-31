@@ -5,11 +5,11 @@ enum Worldview {
   pl2 = 'Then the Colossuses appeared, devastating literally everything on earth.',
   pl3 = 'Humans who managed to survive gathered in Albion, preparing for the last battle.',
   pr1 = 'It was then the Magisters, a certain group of Vulgus with high technical skills, who joined them.',
-  rr2 = 'The Magisters were determined to not allow their weapons to be used to destroy Ingris any further. And above all, Arche found in humans’ genes was a genuine heritage which had infinite potentials.',
+  pr2 = 'The Magisters were determined to not allow their weapons to be used to destroy Ingris any further. And above all, Arche found in humans’ genes was a genuine heritage which had infinite potentials.',
   button = 'See Details',
 }
 const CharacterText = 'Character';
-const SkillBackGround = "data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0…dBlur_3_15'/%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E";
+const SkillBackGround = 'url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox=\'0…dBlur_3_15\'/%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E")';
 const Characters = [
   {
     name: 'Ajax',
@@ -57,6 +57,6 @@ const arrowLeftBG =
   "url(\"data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 25 33' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.164 15.968L16.877 6.32 17.61 0 0 15.968 17.61 33l-.733-6.321L6.164 15.968z' fill='%23fff'/%3E%3Cpath d='M25 16.5l-5.189-5.073-5.188 5.073 5.188 5.073L25 16.5z' fill='%23fff'/%3E%3C/svg%3E\")";
 
 const arrowRightBG =
-  "data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 25 33' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18.836 15.968L8.123 6.32 7.39 0 25 15.968 7.39 33l.733-6.321 10.713-10.711z' fill='%23fff'/%3E%3Cpath d='M0 16.5l5.188-5.073 5.189 5.073-5.189 5.073L0 16.5z' fill='%23fff'/%3E%3C/svg%3E";
+  "url(\"data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 25 33' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18.836 15.968L8.123 6.32 7.39 0 25 15.968 7.39 33l.733-6.321 10.713-10.711z' fill='%23fff'/%3E%3Cpath d='M0 16.5l5.188-5.073 5.189 5.073-5.189 5.073L0 16.5z' fill='%23fff'/%3E%3C/svg%3E\")";
 
 export { Worldview, CharacterText, Characters, SkillBackGround, arrowLeftBG, arrowRightBG };
