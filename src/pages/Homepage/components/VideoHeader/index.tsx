@@ -44,7 +44,7 @@ const VideoHeader: React.FC = () => {
           </GameTitle>
         </TopCover>
         <NoticeList>
-          <div className="flex justify-content-center">
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             {annoucement.map((e, value) => {
               return (
                 <Article key={`article-${value}`}>

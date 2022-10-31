@@ -68,17 +68,17 @@ const NavbarMain: React.FC = () => {
   return (
     <Header>
       <LogoFrame>
-        <a className="block" href="#" onClick={(e) => e.preventDefault()}>
+        <a style={{ display: 'block' }} href="#" onClick={(e) => e.preventDefault()}>
           <img
-            className="block max-w-full border-solid"
             src="https://tfdvod.dn.nexoncdn.co.kr/img/cbt/header/logo.png"
             alt="The first descendant cbt"
+            style={{ display: 'block', width: '100%', borderStyle: 'solid' }}
           />
         </a>
       </LogoFrame>
       <NavButtonLayout className="nav-header">
-        <ul className="flex" style={{ width: '100%' }}>
-          <LiNav className="list-item">
+        <ul style={{ width: '100%', display: 'flex' }}>
+          <LiNav style={{ display: 'list-item' }}>
             <NavButton href="#" onClick={(e: MouseEvent) => e.preventDefault()}>
               {NavbarTitle.news}
             </NavButton>
@@ -90,7 +90,7 @@ const NavbarMain: React.FC = () => {
               </LiDropDown>
             </UlDropDown>
           </LiNav>
-          <LiNav className="list-item">
+          <LiNav style={{ display: 'list-item' }}>
             <NavButton href="#" onClick={(e: MouseEvent) => e.preventDefault()}>
               {NavbarTitle.info}
             </NavButton>
@@ -107,7 +107,7 @@ const NavbarMain: React.FC = () => {
               </LiDropDown>
             </UlDropDown>
           </LiNav>
-          <LiNav className="list-item">
+          <LiNav style={{ display: 'list-item' }}>
             <NavButton href="#" onClick={(e: MouseEvent) => e.preventDefault()}>
               {NavbarTitle.support}
             </NavButton>
