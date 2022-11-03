@@ -1,5 +1,5 @@
 import React from 'react';
-import { Worldview } from '../../../../../../constant/homepage.character';
+import { ButtonDetail, Worldview } from '../../../../../../constant/homepage.character';
 import { LeftParagraph, RightParagraph, SeeDetailButton, TextDefault, TextLeft, TextRight, WorldviewTitle } from './styled';
 
 const WorldView: React.FC<{ active: number }> = ({ active }) => {
@@ -26,7 +26,9 @@ const WorldView: React.FC<{ active: number }> = ({ active }) => {
           <p style={{ fontSize: '17px', fontWeight: '300', lineHeight: '28px' }}>{Worldview.pr2}</p>
         </RightParagraph>
       </TextRight>
-      <SeeDetailButton active={active}>{Worldview.button}</SeeDetailButton>
+      <SeeDetailButton active={active} href="#">
+        {ButtonDetail}
+      </SeeDetailButton>
     </div>
   );
 };

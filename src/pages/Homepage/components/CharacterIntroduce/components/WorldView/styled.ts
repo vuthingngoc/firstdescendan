@@ -112,7 +112,7 @@ const SeeDetailButton = styled.a<{ active: number }>`
   padding: 0 20px;
   min-width: 180px;
   height: 40px;
-  color: #fff;
+  color: #fff !important;
   overflow: hidden;
   border: 1px solid #f4fffe;
   font-size: 18px;
@@ -122,6 +122,9 @@ const SeeDetailButton = styled.a<{ active: number }>`
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 0.3s;
+  :hover::before {
+    opacity: 1;
+  }
   ::before {
     content: '';
     display: block;

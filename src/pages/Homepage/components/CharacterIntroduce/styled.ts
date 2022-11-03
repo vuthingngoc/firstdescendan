@@ -10,7 +10,7 @@ const Section = styled.section<{
   background-position: top;
 `;
 
-const SwipperWrap = styled.div<{ overlay: string; nameImg: string }>`
+const SwipperWrap = styled.div<{ overlay: string; nameImg: string; active: number }>`
   ::before {
     background-image: url(${(props) => props.overlay});
     background-position: calc(50% - 280px) top;
@@ -24,6 +24,7 @@ const SwipperWrap = styled.div<{ overlay: string; nameImg: string }>`
     height: 100%;
     opacity: 0;
     transition: all 0.3s ease;
+    ${(props) => (props.active === 3 ? `opacity: 1;` : '')}
   }
   ::after {
     background-image: url(${(props) => props.nameImg});
@@ -38,6 +39,7 @@ const SwipperWrap = styled.div<{ overlay: string; nameImg: string }>`
     height: 100%;
     opacity: 0;
     transition: all 0.3s ease;
+    ${(props) => (props.active === 3 ? `opacity: 1;` : '')}
   }
 `;
 

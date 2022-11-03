@@ -1,19 +1,18 @@
 import React from 'react';
 import { BrowserRouter, Route, Navigate, Routes } from 'react-router-dom';
 import './App.css';
-import NavbarMain from './components/Navbar/navbar';
+// import NavbarMain from './components/Navbar/navbar';
 import Homepage from './pages/Homepage';
+import ThreeJS from './pages/ThreeJS';
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <div className="cbt en">
-        <NavbarMain />
-        <Routes>
-          <Route path="/cbt" element={<Homepage />} />
-          <Route path="*" element={<Navigate replace to="/cbt" />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/cbt" element={<Homepage />} />
+        <Route path="/threejs" element={<ThreeJS />} />
+        <Route path="*" element={<Navigate replace to="/cbt" />} />
+      </Routes>
     </BrowserRouter>
   );
 };

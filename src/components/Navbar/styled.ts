@@ -39,6 +39,7 @@ const NavButtonLayout = styled.nav`
   position: relative;
   margin-left: 115px;
   width: 100%;
+  height: 80px;
   &:hover ul > li > ul {
     height: 200px;
   }
@@ -356,6 +357,7 @@ const UlDropDown = styled.ul`
   height: 0;
   overflow: hidden;
   transition: all 0.2s;
+  padding: 0 16px;
 `;
 
 const LiDropDown = styled.li`

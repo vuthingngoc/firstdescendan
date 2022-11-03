@@ -13,7 +13,7 @@ const CharacterIntroduce: React.FC = () => {
   };
   return (
     <Section bgURL={character.background}>
-      <SwipperWrap overlay={character.overlay} nameImg={character.nameImg}>
+      <SwipperWrap overlay={character.overlay} nameImg={character.nameImg} active={sideShow}>
         <WorldView active={sideShow} />
         <Character active={sideShow} />
         <MouseDrag sideShow={sideShow} setSide={setSide} />
