@@ -22,45 +22,51 @@ function ThreeJS() {
   };
 
   const Sea = () => {
-    const sea = new THREE.CylinderGeometry(600, 600, 800, 64, 10);
+    const geoSea = new THREE.CylinderGeometry(600, 600, 4000, 64, 10);
 
-    sea.applyMatrix4(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+    geoSea.applyMatrix4(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+
+    // sea.attributes.position.mergeVertices();
+
+    // sea.setAttribute('vertices', new THREE.BufferAttribute(vertices, 3));
+    // const tempGeo = new THREE.Geometry().fromBufferGeometry(sea);
+
+    // tempGeo.mergeVertices();
+
+    const l = geoSea.attributes.position.array.length;
+
+    const sea = { geo: geoSea };
+
+    sea.waves = [];
+
+    for (let i = 0; i < l; i += 3) {
+      // get each vertex
+      // const v = geoSea.attributes.position.array[i];
+
+      // store some data associated to it
+      sea.waves.push({
+        y: geoSea.attributes.position.array[i],
+        x: geoSea.attributes.position.array[i] + 1,
+        z: geoSea.attributes.position.array[i] + 2,
+        // a random angle
+        ang: Math.random() * Math.PI * 2,
+        // a random distance
+        amp: 5 + Math.random() * 15,
+        // a random speed between 0.016 and 0.048 radians / frame
+        speed: 0.016 + Math.random() * 0.032,
+      });
+    }
 
     const seaMat = new THREE.MeshPhongMaterial({
-      color: Colors.clay,
-      transparent: true,
-      opacity: 1,
+      color: Colors.blue,
+      flatShading: true,
     });
 
-    sea.mesh = new THREE.Mesh(sea, seaMat);
+    sea.mesh = new THREE.Mesh(geoSea, seaMat);
     sea.mesh.receiveShadow = true;
     sea.mesh.position.y = -600;
+    console.log(sea);
     return sea;
-  };
-
-  const Cloud = () => {
-    const cloud = new THREE.Object3D();
-    const cloudGeom = new THREE.BoxGeometry(20, 20, 20);
-    const cloudMat = new THREE.MeshPhongMaterial({
-      color: Colors.white,
-    });
-
-    const nBlocs = 3 + Math.floor(Math.random() * 3);
-    for (let i = 0; i < nBlocs; i++) {
-      const m = new THREE.Mesh(cloudGeom, cloudMat);
-      m.position.x = i * 15;
-      m.position.y = Math.random() * 10;
-      m.position.z = Math.random() * 10;
-      m.rotation.z = Math.random() * Math.PI * 2;
-      m.rotation.y = Math.random() * Math.PI * 2;
-
-      const s = 0.1 + Math.random() * 0.9;
-      m.scale.set(s, s, s);
-      m.castShadow = true;
-      m.receiveShadow = true;
-      cloud.add(m);
-    }
-    return cloud;
   };
 
   const AirPlane = () => {
@@ -68,7 +74,7 @@ function ThreeJS() {
 
     // Tạo cabin
     const geomCockpit = new THREE.BoxGeometry(60, 50, 50, 1, 1, 1);
-    const matCockpit = new THREE.MeshPhongMaterial({ color: Colors.green, flatShading: true });
+    const matCockpit = new THREE.MeshPhongMaterial({ color: Colors.red, flatShading: true });
     const cockpit = new THREE.Mesh(geomCockpit, matCockpit);
     cockpit.castShadow = true;
     cockpit.receiveShadow = true;
@@ -85,7 +91,7 @@ function ThreeJS() {
 
     // Tạo đuôi
     const geomTailPlane = new THREE.BoxGeometry(35, 20, 5, 1, 1, 1);
-    const matTailPlane = new THREE.MeshPhongMaterial({ color: Colors.red, flatShading: true });
+    const matTailPlane = new THREE.MeshPhongMaterial({ color: Colors.white, flatShading: true });
     const tailPlane = new THREE.Mesh(geomTailPlane, matTailPlane);
     tailPlane.position.set(-35, 25, 0);
     tailPlane.castShadow = true;
@@ -123,15 +129,42 @@ function ThreeJS() {
     return planeMesh;
   };
 
+  const Cloud = () => {
+    const cloud = new THREE.Object3D();
+    const cloudGeom = new THREE.BoxGeometry(20, 20, 20);
+    const cloudMat = new THREE.MeshPhongMaterial({
+      color: Colors.white,
+      transparent: true,
+      opacity: 0.7,
+    });
+
+    const nBlocs = 3 + Math.floor(Math.random() * 3);
+    for (let i = 0; i < nBlocs; i++) {
+      const m = new THREE.Mesh(cloudGeom, cloudMat);
+      m.position.x = i * 15;
+      m.position.y = Math.random() * 10;
+      m.position.z = Math.random() * 10;
+      m.rotation.z = Math.random() * Math.PI * 2;
+      m.rotation.y = Math.random() * Math.PI * 2;
+
+      const s = 0.1 + Math.random() * 0.9;
+      m.scale.set(s, s, s);
+      m.castShadow = true;
+      m.receiveShadow = true;
+      cloud.add(m);
+    }
+    return cloud;
+  };
+
   const Sky = () => {
     const skyMes = new THREE.Object3D();
 
-    const nClouds = 20;
+    const nClouds = 50;
     const stepAngle = (Math.PI * 2) / nClouds;
 
     for (let i = 0; i < nClouds; i++) {
       const a = stepAngle * i;
-      const h = 750 + Math.random() * 200;
+      const h = 900 + Math.random() * 500;
       const cloud = Cloud();
 
       cloud.position.y = Math.sin(a) * h;
@@ -139,9 +172,9 @@ function ThreeJS() {
 
       cloud.rotation.z = a + Math.PI / 2;
 
-      cloud.position.z = -400 - Math.random() * 400;
+      cloud.position.z = Math.random() * 2000 - 1000;
 
-      var s = 1 + Math.random() * 2;
+      const s = 1 + Math.random() * 2;
       cloud.scale.set(s, s, s);
       skyMes.add(cloud);
     }
@@ -150,28 +183,65 @@ function ThreeJS() {
 
   const Camera = (width, height) => {
     const aspectRatio = width / height;
-    const fieldOfView = 60;
+    const fieldOfView = 90;
     const nearCam = 1;
     const farCam = 10000;
     const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearCam, farCam);
-    camera.position.x = 0;
-    camera.position.y = 100;
-    camera.position.z = 200;
+    camera.position.x = -150;
+    camera.position.y = 150;
+    camera.position.z = 0;
+    camera.rotation.y = -1.5;
+    camera.rotation.z = 0;
+    // camera.position.x = 0;
+    // camera.position.z = 200;
+    // camera.position.y = 100;
     return camera;
   };
 
-  const Chimney = () => {
-    const chimney = new THREE.Object3D();
+  const Island = () => {
+    const island = new THREE.Object3D();
 
-    const geomChimney = new THREE.BoxGeometry(50, 1350, 50, 1, 1, 1);
-    const matChimney = new THREE.MeshBasicMaterial({ color: Colors.brown });
-    console.log(matChimney);
-    const chimneyMesh = new THREE.Mesh(geomChimney, matChimney);
-    chimney.castShadow = true;
-    chimney.receiveShadow = true;
-    chimney.add(chimneyMesh);
+    const geomGround = new THREE.ConeGeometry(100, 30, 64, 64);
+    const matGround = new THREE.MeshPhongMaterial({ color: Colors.yellow, transparent: true, opacity: 1 });
+    const groundMesh = new THREE.Mesh(geomGround, matGround);
+    groundMesh.position.y = 605;
+    groundMesh.castShadow = true;
+    groundMesh.receiveShadow = true;
+    island.add(groundMesh);
 
-    return chimney;
+    const geomTree = new THREE.CylinderGeometry(4, 4, 130, 30, 1);
+    const matTree = new THREE.MeshPhongMaterial({ color: Colors.brown });
+    const treeMesh = new THREE.Mesh(geomTree, matTree);
+    treeMesh.position.y = 610;
+    treeMesh.castShadow = true;
+    treeMesh.receiveShadow = true;
+    island.add(treeMesh);
+
+    const geomLeaf = new THREE.IcosahedronGeometry(40, 5);
+    const matLeaf = new THREE.MeshPhongMaterial({ color: Colors.green });
+    const leafMesh = new THREE.Mesh(geomLeaf, matLeaf);
+    leafMesh.position.y = 580 + 130;
+    leafMesh.castShadow = true;
+    leafMesh.receiveShadow = true;
+    island.add(leafMesh);
+
+    return island;
+  };
+
+  const GroupIslands = () => {
+    const groupIsland = new THREE.Object3D();
+
+    const nIsland = 14;
+    const stepAngle = (Math.PI * 2) / nIsland;
+    for (let i = 0; i < nIsland; i++) {
+      const a = stepAngle * i;
+      const island = Island();
+
+      island.rotation.z = a + Math.PI / 2;
+      island.position.z = Math.random() * 1600 - 800;
+      groupIsland.add(island);
+    }
+    return groupIsland;
   };
 
   useEffect(() => {
@@ -180,7 +250,7 @@ function ThreeJS() {
     const scene = new THREE.Scene();
     const camera = Camera(WIDTH, HEIGHT);
 
-    scene.fog = new THREE.Fog(0xf7d9aa, 100, 950);
+    scene.fog = new THREE.Fog(0xf7d9aa, 100, 9500);
     const container = document.getElementById('world');
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -207,6 +277,9 @@ function ThreeJS() {
     scene.add(light.hemisphereLight);
     scene.add(light.shadowLight);
 
+    const ambientLight = new THREE.AmbientLight(0xdc8874, 0.5);
+    scene.add(ambientLight);
+
     //sea
     const sea = Sea();
     scene.add(sea.mesh);
@@ -223,30 +296,40 @@ function ThreeJS() {
     plane.position.x = -80;
     scene.add(plane);
 
-    //chimney
-    const chimney = Chimney();
-    chimney.position.y = -600;
-    chimney.position.z = -20;
-    scene.add(chimney);
+    //group island
+    const groupIslands = GroupIslands();
+    groupIslands.position.y = -600;
+    scene.add(groupIslands);
 
     let mouseClick = false;
-    document.addEventListener(
-      'click',
-      () => {
-        const newHeight = plane.position.y + 50;
+    document.body.addEventListener(
+      'keydown',
+      (e) => {
+        if (e.key === ' ' || e.code === 'Space' || e.key === 'w' || e.code === 'KeyW') {
+          const newHeight = plane.position.y + 50;
 
-        if (!(newHeight >= 250)) {
-          mouseClick = true;
-          const jump = setInterval(() => {
-            plane.position.y += 0.5;
-            if (plane.position.y >= newHeight) {
-              clearInterval(jump);
-              mouseClick = false;
-            }
-          }, 1);
+          if (!(newHeight >= 500)) {
+            mouseClick = true;
+            const jump = setInterval(() => {
+              plane.position.y += 0.5;
+              if (plane.position.y >= newHeight) {
+                clearInterval(jump);
+                mouseClick = false;
+              }
+            }, 1);
+          }
+        }
+        if (e.key === 'a' || e.code === 'KeyA') {
+          if (plane.position.z >= -190) plane.position.z -= 1;
+        }
+        if (e.key === 'd' || e.code === 'KeyD') {
+          if (plane.position.z <= 190) plane.position.z += 1;
+        }
+        if (e.key === 's' || e.code === 'KeyS') {
+          if (plane.position.y > 10) plane.position.y -= 4;
         }
       },
-      false
+      true
     );
 
     let rotateplane = true;
@@ -259,19 +342,38 @@ function ThreeJS() {
         plane.rotation.x -= 0.005;
         if (plane.rotation.x <= -0.5) rotateplane = true;
       }
-      sea.mesh.rotation.z += 0.005;
+      // sea.mesh.rotation.z += 0.005;
       sky.rotation.z += 0.01;
-      chimney.rotation.z += 0.005;
+      groupIslands.rotation.z += 0.005;
 
       //gravity for plane
-      if (!mouseClick)
+      if (!mouseClick) {
         if (plane.position.y > 10) {
           plane.position.y -= 1;
         }
+      }
+
+      //camera follow
+      camera.position.y = plane.position.y + 30;
 
       // render the scene
       renderer.render(scene, camera);
 
+      //move waves
+      const verts = sea.mesh.geometry;
+      const l = sea.waves.length;
+
+      for (let i = 0; i < l; i++) {
+        const vprops = sea.waves[i];
+        // update the position of the vertex
+        verts.setX(i * 3) = vprops.x + Math.cos(vprops.ang) * vprops.amp;
+        verts.setY(i * 3 + 1) = vprops.y + Math.sin(vprops.ang) * vprops.amp;
+        vprops.ang += vprops.speed;
+      }
+
+      sea.mesh.geometry.verticesNeedUpdate = true;
+
+      sea.mesh.rotation.z += 0.005;
       requestAnimationFrame(loop);
     };
     loop();

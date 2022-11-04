@@ -28,12 +28,12 @@ const MouseDrag: React.FC<propsType> = ({ setSide, sideShow }) => {
     const e = event || window.event;
     e.preventDefault();
     const changePos = e.clientX;
-    const newWidth = window.screen.width - changePos;
+    const newWidth = window.innerWidth - changePos;
 
-    if (newWidth <= window.screen.width) setWidth(newWidth + 'px');
-    if (newWidth < window.screen.width / 3) {
+    if (newWidth <= window.innerWidth) setWidth(newWidth + 'px');
+    if (newWidth < window.innerWidth / 3) {
       if (sideShow !== 2) setSide(2);
-    } else if (newWidth > (window.screen.width * 2) / 3) {
+    } else if (newWidth > (window.innerWidth * 2) / 3) {
       if (sideShow !== 3) setSide(3);
     } else {
       if (sideShow !== 4) setSide(4);
