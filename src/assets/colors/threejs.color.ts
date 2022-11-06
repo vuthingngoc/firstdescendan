@@ -8,6 +8,7 @@ const Colors = {
   clay: 0x9a9c91,
   blue: 0x68c3c0,
   yellow: 0xf6d7b0,
+  darkBlue: 0x247794,
 };
 
 export { Colors };

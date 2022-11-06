@@ -26,39 +26,32 @@ function ThreeJS() {
 
     geoSea.applyMatrix4(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
 
-    // sea.attributes.position.mergeVertices();
-
-    // sea.setAttribute('vertices', new THREE.BufferAttribute(vertices, 3));
-    // const tempGeo = new THREE.Geometry().fromBufferGeometry(sea);
-
-    // tempGeo.mergeVertices();
-
-    const l = geoSea.attributes.position.array.length;
+    const l = 325;
 
     const sea = { geo: geoSea };
 
     sea.waves = [];
 
-    for (let i = 0; i < l; i += 3) {
+    for (let i = 0; i < l; i++) {
       // get each vertex
-      // const v = geoSea.attributes.position.array[i];
+      const v = geoSea.attributes.position;
 
       // store some data associated to it
       sea.waves.push({
-        y: geoSea.attributes.position.array[i],
-        x: geoSea.attributes.position.array[i] + 1,
-        z: geoSea.attributes.position.array[i] + 2,
+        y: v.getY(i),
+        x: v.getX(i),
+        z: v.getZ(i),
         // a random angle
         ang: Math.random() * Math.PI * 2,
         // a random distance
-        amp: 5 + Math.random() * 15,
+        amp: 5 + Math.random() * 25,
         // a random speed between 0.016 and 0.048 radians / frame
-        speed: 0.016 + Math.random() * 0.032,
+        speed: 0.016 + Math.random() * 0.058,
       });
     }
 
     const seaMat = new THREE.MeshPhongMaterial({
-      color: Colors.blue,
+      color: Colors.darkBlue,
       flatShading: true,
     });
 
@@ -201,7 +194,7 @@ function ThreeJS() {
   const Island = () => {
     const island = new THREE.Object3D();
 
-    const geomGround = new THREE.ConeGeometry(100, 30, 64, 64);
+    const geomGround = new THREE.CylinderGeometry(4, 100, 30, 64, 1);
     const matGround = new THREE.MeshPhongMaterial({ color: Colors.yellow, transparent: true, opacity: 1 });
     const groundMesh = new THREE.Mesh(geomGround, matGround);
     groundMesh.position.y = 605;
@@ -360,18 +353,20 @@ function ThreeJS() {
       renderer.render(scene, camera);
 
       //move waves
-      const verts = sea.mesh.geometry;
-      const l = sea.waves.length;
+      const verts = sea.mesh.geometry.attributes.position;
+      const l = 325;
 
       for (let i = 0; i < l; i++) {
         const vprops = sea.waves[i];
         // update the position of the vertex
-        verts.setX(i * 3) = vprops.x + Math.cos(vprops.ang) * vprops.amp;
-        verts.setY(i * 3 + 1) = vprops.y + Math.sin(vprops.ang) * vprops.amp;
+        verts.setX(i, vprops.x + Math.cos(vprops.ang) * vprops.amp);
+        verts.setY(i, vprops.y + Math.sin(vprops.ang) * vprops.amp);
         vprops.ang += vprops.speed;
       }
 
-      sea.mesh.geometry.verticesNeedUpdate = true;
+      verts.needsUpdate = true;
+      sea.mesh.geometry.computeBoundingBox();
+      sea.mesh.geometry.computeBoundingSphere();
 
       sea.mesh.rotation.z += 0.005;
       requestAnimationFrame(loop);
